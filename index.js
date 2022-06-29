@@ -56,7 +56,7 @@ const main = async () => {
             templateMessage = {
             image: { url: image.url },
             caption: teks,
-            footer: "By Aiden_Notlogic",
+            footer: config.botName,
             templateButtons: templateButtons
         }
         killua.sendMessage(to, templateMessage)
@@ -64,7 +64,7 @@ const main = async () => {
         else {
             templateMessage = {
             caption: teks,
-            footer: "By Aiden_Notlogic",
+            footer: config.botName,
             templateButtons: templateButtons
         }
         killua.sendMessage(to, templateMessage)
@@ -110,14 +110,25 @@ const main = async () => {
                 break
                 case 'example':
                     sendButtonMessage(m.key.remoteJid, [
-                        { urlButton: { displayText: "Url", url: "https://google.com" } },
-                        { urlButton: { displayText: `Copiar`, url: 'https://www.whatsapp.com/otp/copy/577345' } },
-                        { callButton: {displayText: 'LLamame!', phoneNumber: '+1 (234) 5678-901'} },
-                        { quickReplyButton: { displayText: "Boton 1", id: "#ping" } },
-                        { quickReplyButton: { displayText: "Boton 2", id: "#ping" } },
-                        { quickReplyButton: { displayText: "Boton 3", id: "#ping" } },
+                        { index: 1, urlButton: { displayText: "Url", url: "https://google.com" } },
+                        { index: 2, urlButton: { displayText: `Copiar`, url: 'https://www.whatsapp.com/otp/copy/577345' } },
+                        { index: 4, quickReplyButton: { displayText: "Boton 1", id: "#ping" } },
+                        { index: 5, quickReplyButton: { displayText: "Boton 2", id: "#ping" } },
+                        { index: 6, quickReplyButton: { displayText: "Boton 3", id: "#ping" } },
                     ], "Test", { image : { url: 'https://camo.githubusercontent.com/23f3195d91e7095ae37ef6a22475b9f1206f8334bc3e5ca61637f7d7e8cf962a/68747470733a2f2f692e70696e696d672e636f6d2f373336782f66662f38372f62372f66663837623730653963396465613464396361333263393533386138316333622e6a7067' } })
                     break
+                case 'help':
+                case 'menu':
+                    let xd = `      ${config.botName} Bot
+Commands:
+${prefix}help - Muestra este menu
+${prefix}ping - Pong!
+${prefix}example - Muestra un ejemplo de la funcion de botones`
+                    sendButtonMessage(m.key.remoteJid, [
+                        { quickReplyButton: { displayText: "Ping", id: "#ping" } }
+                    ], xd, { image : { url: 'https://camo.githubusercontent.com/23f3195d91e7095ae37ef6a22475b9f1206f8334bc3e5ca61637f7d7e8cf962a/68747470733a2f2f692e70696e696d672e636f6d2f373336782f66662f38372f62372f66663837623730653963396465613464396361333263393533386138316333622e6a7067' } })
+                    break
+
             }
         } catch (e) {
             console.error(e)
